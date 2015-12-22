@@ -63,6 +63,8 @@ ep_matches (
 
 	int		num_req_streams = 0;
 
+	printk("%s, check ep_matches gadget = %s\n", __func__, gadget->name);
+
 #ifndef CONFIG_USB_SUNXI_USB
 	/* endpoint already claimed? */
 	if (NULL != ep->driver_data)
@@ -108,12 +110,12 @@ ep_matches (
 			/* softwinner otg support -int */
 #ifdef CONFIG_ARCH_SUN9IW1
 			if(gadget_is_sunxi(gadget) && 'n' != tmp [2]){
-				printk("gadget_is_softwinner_otg is not -int\n");
+				printk("gadget_is_softwinner_otg is false a -int - %s\n", gadget->name);
 				return 0;
 			}
 #else
 			if(gadget_is_softwinner_otg(gadget) && 'n' != tmp [2]){
-				printk("gadget_is_softwinner_otg is not -int\n");
+				printk("gadget_is_softwinner_otg is false b -int - %s\n", gadget->name);
 				return 0;
 			}
 #endif
@@ -138,12 +140,12 @@ ep_matches (
                 /* softwinner otg support -int */
 #ifdef CONFIG_ARCH_SUN9IW1
 			if(gadget_is_sunxi(gadget) && 'n' != tmp [2]){
-				printk("gadget_is_softwinner_otg is not -int\n");
+				printk("gadget_is_softwinner_otg is false a -int - %s\n", gadget->name);
 				return 0;
 			}
 #else
 			if(gadget_is_softwinner_otg(gadget) && 'n' != tmp [2]){
-				printk("gadget_is_softwinner_otg is not -int\n");
+				printk("gadget_is_softwinner_otg is false b -int - %s\n", gadget->name);
 				return 0;
 			}
 #endif

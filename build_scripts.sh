@@ -23,11 +23,7 @@ build_script() {
 	# === Building boot0 image =========================================================
 	echo "Building script.bin.${1}_${2}_${3}"
 	
-	if [ "${1}" = "OPI-PLUS" ]; then
-		cp build/orange_pi_plus.fex build/sys_config.fex
-	elif [ "${1}" = "OPI-2" ]; then
-		cp build/orange_pi2.fex build/sys_config.fex
-	elif [ "${1}" = "OPI-PC" ]; then
+	if [ "${1}" = "OPI-PC" ]; then
 		cp build/orange_pi_pc.fex build/sys_config.fex
 	else
 		return 0
@@ -65,7 +61,7 @@ build_script() {
 
 	cp chips/sun8iw7p1/bin/boot0_sdcard_sun8iw7p1.bin build/boot0_sdcard.fex
 
-	fex2bin build/sys_config.fex build/sys_config.bin
+	../sunxi-tools/fex2bin build/sys_config.fex build/sys_config.bin
 	if [ $? -ne 0 ]; then
 	  echo "  Error."
 	  exit 1
@@ -89,41 +85,10 @@ if [ "${1}" = "clean" ]; then
     exit 0
 fi
 
-build_script "OPI-2" "1080p60" "hdmi"
-build_script "OPI-2" "1080p50" "hdmi"
-build_script "OPI-2" "720p50" "hdmi"
-build_script "OPI-2" "720p60" "hdmi"
-build_script "OPI-2" "480p" "hdmi"
-
-build_script "OPI-PLUS" "1080p60" "hdmi"
-build_script "OPI-PLUS" "1080p50" "hdmi"
-build_script "OPI-PLUS" "720p50" "hdmi"
-build_script "OPI-PLUS" "720p60" "hdmi"
-build_script "OPI-PLUS" "480p" "hdmi"
-
 build_script "OPI-PC" "1080p60" "hdmi"
 build_script "OPI-PC" "1080p50" "hdmi"
 build_script "OPI-PC" "720p50" "hdmi"
 build_script "OPI-PC" "720p60" "hdmi"
-build_script "OPI-PC" "480p" "hdmi"
-
-build_script "OPI-2" "1080p60" "dvi"
-build_script "OPI-2" "1080p50" "dvi"
-build_script "OPI-2" "720p50" "dvi"
-build_script "OPI-2" "720p60" "dvi"
-build_script "OPI-2" "480p" "dvi"
-
-build_script "OPI-PLUS" "1080p60" "dvi"
-build_script "OPI-PLUS" "1080p50" "dvi"
-build_script "OPI-PLUS" "720p50" "dvi"
-build_script "OPI-PLUS" "720p60" "dvi"
-build_script "OPI-PLUS" "480p" "dvi"
-
-build_script "OPI-PC" "1080p60" "dvi"
-build_script "OPI-PC" "1080p50" "dvi"
-build_script "OPI-PC" "720p50" "dvi"
-build_script "OPI-PC" "720p60" "dvi"
-build_script "OPI-PC" "480p" "dvi"
 
 echo "END."
 
